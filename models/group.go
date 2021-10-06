@@ -6,7 +6,7 @@ import (
 
 type Group struct {
 	gorm.Model
-	Name	string	`json:"name"`
+	Name	string	`json:"name" gorm:"unique,index" validate:"required,alphanum,min=6,max=32"`
 	Users	[]User	`json:"users" gorm:"many2many:user_groups"`
 }
 

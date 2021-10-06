@@ -6,10 +6,10 @@ import (
 
 type Application struct {
 	gorm.Model
-	Name			string		`json:"name" binding:"required"`
+	Name			string		`json:"name" gorm:"notnull" binding:"required"`
 	Description		string		`json:"description"`
 	Comments		string		`json:"comments"`
-	BusinessServiceID	uint		`json:"businessServiceId" binding:"required"`
+	BusinessServiceID	uint		`json:"businessServiceId" gorm:"notnull" binding:"required"`
 	BusinessService		BusinessService
 	DependsOn		[]*Application	`json:"dependsOn" gorm:"many2many:application_dependencies"`
 	Tags			[]Tag		`json:"tags" gorm:"many2many:application_tags"`

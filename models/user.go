@@ -6,11 +6,9 @@ import (
 
 type User struct {
 	gorm.Model
-	Username	string	`json:"username"`
-	FistName	string	`json:"firstName"`
-	MiddleName	string	`json:"middleName"`
-	LastName	string	`json:"lastName"`
-	Email		string	`json:"email"`
+	Username	string	`json:"username" gorm:"notnull,unique,index" binding:"required,alphanum,min=6,max=32"`
+	DisplayName	string	`json:"displayName" gorm:"notnull" binding:"required"`
+	Email		string	`json:"email" gorm:"notnull" binding:"required,email"`
 	Groups		[]Group	`json:"groups" gorm:"many2many:user_groups"`
 }
 
