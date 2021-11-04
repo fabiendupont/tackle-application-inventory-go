@@ -1,0 +1,1878 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Tackle Hub provides an API to manipulate core Tackle objects",
+        "title": "Tackle Hub - OpenAPI",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Konveyor Tackle",
+            "url": "https://konveyor.io",
+            "email": "contact@konveyor.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "3.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/application-inventory/application": {
+            "get": {
+                "description": "get all the application",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_applications"
+                ],
+                "summary": "Lists all the applications.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Application"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create an application",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create_application"
+                ],
+                "summary": "Create an application",
+                "parameters": [
+                    {
+                        "description": "Application data",
+                        "name": "application",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Application"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Application"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/application/:id": {
+            "get": {
+                "description": "get a single application by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_application"
+                ],
+                "summary": "Get a single application by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Application id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Application"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update an application",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_application"
+                ],
+                "summary": "Update an application",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Application id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Application data",
+                        "name": "application",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Application"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Application"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete an application",
+                "tags": [
+                    "delete_application"
+                ],
+                "summary": "Delete an application",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Application id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Application"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/binary-repository": {
+            "get": {
+                "description": "get all binary repositories.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_binary_repositories"
+                ],
+                "summary": "Get all binary repositories.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BinaryRepository"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a single binary repository.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_binary_repository"
+                ],
+                "summary": "Create a single binary repository.",
+                "parameters": [
+                    {
+                        "description": "Binary Repository data",
+                        "name": "binary_repository",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.BinaryRepository"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BinaryRepository"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/binary-repository/:id": {
+            "get": {
+                "description": "get a single binary repository by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_binary_repository"
+                ],
+                "summary": "Get a single binary repository by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Binary Repsoritory id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BinaryRepository"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single binary repository by its id.",
+                "tags": [
+                    "delete_binary_repository"
+                ],
+                "summary": "Delete a single binary repository by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Binary Repository id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BinaryRepository"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/binary_repository/:id": {
+            "put": {
+                "description": "update a single binary repository by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_binary_repository"
+                ],
+                "summary": "Update a single binary repository by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Binary Repository id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Binary Repository data",
+                        "name": "binary_repository",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.BinaryRepository"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BinaryRepository"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/review": {
+            "get": {
+                "description": "get all reviews.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_reviews"
+                ],
+                "summary": "Get all reviews.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Review"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a single review.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create_review"
+                ],
+                "summary": "Create a single review.",
+                "parameters": [
+                    {
+                        "description": "Review data",
+                        "name": "review",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Review"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Review"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/review/:id": {
+            "get": {
+                "description": "get a single review by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_review"
+                ],
+                "summary": "Get a single review by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Review id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Review"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a single review by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_review"
+                ],
+                "summary": "Update a single review by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Review id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Review data",
+                        "name": "review",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Review"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Review"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single review by its id.",
+                "tags": [
+                    "delete_review"
+                ],
+                "summary": "Delete a single review by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Review id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Review"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/source-repository": {
+            "get": {
+                "description": "get all source repositories.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_source_repositories"
+                ],
+                "summary": "Get all source repositories.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SourceRepository"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a single source repository.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_source_repository"
+                ],
+                "summary": "Create a single source repository.",
+                "parameters": [
+                    {
+                        "description": "Source Repository data",
+                        "name": "source_repository",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SourceRepository"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SourceRepository"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/source-repository/:id": {
+            "get": {
+                "description": "get a single source repository by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_source_repository"
+                ],
+                "summary": "Get a single source repository by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Source Repsoritory id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SourceRepository"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single source repository by its id.",
+                "tags": [
+                    "delete_source_repository"
+                ],
+                "summary": "Delete a single source repository by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Source Repository id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SourceRepository"
+                        }
+                    }
+                }
+            }
+        },
+        "/application-inventory/source_repository/:id": {
+            "put": {
+                "description": "update a single source repository by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_source_repository"
+                ],
+                "summary": "Update a single source repository by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Source Repository id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Source Repository data",
+                        "name": "source_repository",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SourceRepository"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SourceRepository"
+                        }
+                    }
+                }
+            }
+        },
+        "/control/stakeholder-group/:id": {
+            "delete": {
+                "description": "delete a single stakeholder group by its id.",
+                "tags": [
+                    "delete_stakeholder_group"
+                ],
+                "summary": "Delete a single stakeholder group by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Stakeholder Group id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Group"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/business-service": {
+            "get": {
+                "description": "get all business services.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_business_services"
+                ],
+                "summary": "Get all business services.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.BusinessService"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a business service.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create_business_service"
+                ],
+                "summary": "Create a business service.",
+                "parameters": [
+                    {
+                        "description": "Business Service data",
+                        "name": "business_service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.BusinessService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BusinessService"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/business-service/:id": {
+            "get": {
+                "description": "get a single business service by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_business_service"
+                ],
+                "summary": "Get a single business service by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Business Service id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BusinessService"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a single business_service by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_business_service"
+                ],
+                "summary": "Update a single business service by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Business Service id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Business Service data",
+                        "name": "business_service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.BusinessService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BusinessService"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single business service by its id.",
+                "tags": [
+                    "delete_business_service"
+                ],
+                "summary": "Delete a single business service by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Business Service id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BusinessService"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/job-function": {
+            "get": {
+                "description": "get all job functions.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_job_functions"
+                ],
+                "summary": "Get all job functions.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.JobFunction"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a single job function.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create_job_function"
+                ],
+                "summary": "Create a single job function.",
+                "parameters": [
+                    {
+                        "description": "Job Function data",
+                        "name": "application",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.JobFunction"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.JobFunction"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/job-function/:id": {
+            "get": {
+                "description": "get a single job function by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_job_function"
+                ],
+                "summary": "Get a single job function by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Job Function id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.JobFunction"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a single job function by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_job_function"
+                ],
+                "summary": "Update a single job function by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Job Function id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Job Function data",
+                        "name": "application",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.JobFunction"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.JobFunction"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single job function by its id.",
+                "tags": [
+                    "delete_job_function"
+                ],
+                "summary": "Delete a single job function by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Job Function id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.JobFunction"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/stakeholder": {
+            "get": {
+                "description": "get all stakeholders.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_stakeholders"
+                ],
+                "summary": "Get all stakeholders.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.Stakeholder"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a single stakeholder.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create stakeholder"
+                ],
+                "summary": "Create a single stakeholder.",
+                "parameters": [
+                    {
+                        "description": "Stakeholder data",
+                        "name": "stakeholder",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.Stakeholder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.Stakeholder"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/stakeholder-group": {
+            "get": {
+                "description": "get all stakeholder groups.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_stakeholder_groups"
+                ],
+                "summary": "Get all stakeholder groups.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Group"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a single stakeholder group.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create_stakeholder_group"
+                ],
+                "summary": "Create a single stakeholder group.",
+                "parameters": [
+                    {
+                        "description": "Stakeholder Group data",
+                        "name": "stakeholder_group",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Group"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Group"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/stakeholder-group/:id": {
+            "get": {
+                "description": "get a single stakeholder group by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_stakeholder_group"
+                ],
+                "summary": "Get a single stakeholder group by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Stakeholder Group id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Group"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a single stakeholder group by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_stakeholder_group"
+                ],
+                "summary": "Update a single stakeholder group by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Stakeholder Group id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Stakeholder Group data",
+                        "name": "stakeholder_group",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Group"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Group"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/stakeholder/:id": {
+            "get": {
+                "description": "get a single stakeholder by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_stakeholder"
+                ],
+                "summary": "Get a single stakeholder by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Stakeholder id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.Stakeholder"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a single stakeholder by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_stakeholder"
+                ],
+                "summary": "Update a single stakeholder by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Stakeholder id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Stakeholder data",
+                        "name": "stakeholder",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.Stakeholder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.Stakeholder"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single stakeholder by its id.",
+                "tags": [
+                    "delete_stakeholder"
+                ],
+                "summary": "Delete a single stakeholder by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Stakeholder id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.Stakeholder"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/tag": {
+            "get": {
+                "description": "get all tags.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_tags"
+                ],
+                "summary": "Get all tags.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a single tag.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create_tag"
+                ],
+                "summary": "Create a single tag.",
+                "parameters": [
+                    {
+                        "description": "Tag data",
+                        "name": "tag",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/tag-type": {
+            "get": {
+                "description": "get all tag types.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_tag_types"
+                ],
+                "summary": "Get all tag types.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TagType"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create a single tag type.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create_tag_type"
+                ],
+                "summary": "Create a single tag type.",
+                "parameters": [
+                    {
+                        "description": "Tag Type data",
+                        "name": "tag_type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TagType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TagType"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/tag-type/:id": {
+            "get": {
+                "description": "get a single tag type by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_tag_type"
+                ],
+                "summary": "Get a single tag type by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tag Type id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TagType"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a single tag type by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_tag_type"
+                ],
+                "summary": "Update a single tag type by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tag Type id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Tag Type data",
+                        "name": "tag_type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TagType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TagType"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single tag type by its id.",
+                "tags": [
+                    "delete_tag_type"
+                ],
+                "summary": "Delete a single tag type by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tag Type id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.TagType"
+                        }
+                    }
+                }
+            }
+        },
+        "/controls/tag/:id": {
+            "get": {
+                "description": "get a single tag by its id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "get_tag"
+                ],
+                "summary": "Get a single tag by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tag id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update a single tag by its id.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "update_tag"
+                ],
+                "summary": "Update a single tag by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tag id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Tag data",
+                        "name": "tag",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete a single tag by its id.",
+                "tags": [
+                    "delete_tag"
+                ],
+                "summary": "Delete a single tag by its id.",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Tag id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Tag"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllers.Stakeholder": {
+            "type": "object",
+            "required": [
+                "display_name",
+                "email",
+                "job_function_id"
+            ],
+            "properties": {
+                "display_name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "job_function_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "models.Application": {
+            "type": "object",
+            "required": [
+                "business_service_id",
+                "name"
+            ],
+            "properties": {
+                "businessService": {
+                    "$ref": "#/definitions/models.BusinessService"
+                },
+                "business_service_id": {
+                    "type": "integer"
+                },
+                "comments": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "depends_on": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Application"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Tag"
+                    }
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.BinaryRepository": {
+            "type": "object",
+            "required": [
+                "artifact",
+                "group",
+                "name",
+                "url"
+            ],
+            "properties": {
+                "application": {
+                    "$ref": "#/definitions/models.Application"
+                },
+                "application_id": {
+                    "type": "integer"
+                },
+                "artifact": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.BusinessService": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.User"
+                    }
+                }
+            }
+        },
+        "models.Group": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "members": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.User"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.JobFunction": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Review": {
+            "type": "object",
+            "required": [
+                "business_criticality",
+                "effort_estimate",
+                "proposed_action",
+                "work_priority"
+            ],
+            "properties": {
+                "application": {
+                    "$ref": "#/definitions/models.Application"
+                },
+                "application_id": {
+                    "type": "integer"
+                },
+                "business_criticality": {
+                    "type": "integer"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "effort_estimate": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "proposed_action": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "work_priority": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.SourceRepository": {
+            "type": "object",
+            "required": [
+                "branch",
+                "name",
+                "url"
+            ],
+            "properties": {
+                "application": {
+                    "$ref": "#/definitions/models.Application"
+                },
+                "application_id": {
+                    "type": "integer"
+                },
+                "branch": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Tag": {
+            "type": "object",
+            "required": [
+                "name",
+                "tag_type_id"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tagType": {
+                    "$ref": "#/definitions/models.TagType"
+                },
+                "tag_type_id": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TagType": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "colour": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "rank": {
+                    "type": "integer"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Tag"
+                    }
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "required": [
+                "display_name",
+                "email",
+                "job_function_id"
+            ],
+            "properties": {
+                "business_services": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.BusinessService"
+                    }
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "groups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Group"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "jobFunction": {
+                    "$ref": "#/definitions/models.JobFunction"
+                },
+                "job_function_id": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

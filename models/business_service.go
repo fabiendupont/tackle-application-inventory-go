@@ -6,10 +6,9 @@ import (
 
 type BusinessService struct {
 	gorm.Model
-	Name		string	`json:"name" gorm:"notnull" validate:"required"`
-	Description	string	`json:Description"`
-	UserID		uint	`json:"owner_id" gorm:"notnull" validate:"required"`
-	User		User
+	Name		string	`json:"name" gorm:"notnull,unique" validate:"required"`
+	Description	string	`json:"description"`
+	Users		[]User	`json:"users" gorm:"many2many:user_business_services"`
 }
 
 func GetBusinessServices(db *gorm.DB) ([]BusinessService, error) {

@@ -4,15 +4,18 @@ import (
 	"gorm.io/gorm"
 )
 
+
 type Application struct {
 	gorm.Model
 	Name			string		`json:"name" gorm:"notnull" binding:"required"`
 	Description		string		`json:"description"`
 	Comments		string		`json:"comments"`
-	BusinessServiceID	uint		`json:"businessServiceId" gorm:"notnull" binding:"required"`
+	BusinessServiceID	uint		`json:"business_service_id" gorm:"notnull" binding:"required"`
 	BusinessService		BusinessService
-	DependsOn		[]*Application	`json:"dependsOn" gorm:"many2many:application_dependencies"`
+	DependsOn		[]*Application	`json:"depends_on" gorm:"many2many:application_dependencies"`
 	Tags			[]Tag		`json:"tags" gorm:"many2many:application_tags"`
+//	ReviewID		uint		`json:"review_id"`
+//	Review			Review		`json:"review"`
 }
 
 func GetApplications(db *gorm.DB) ([]Application, error) {
@@ -64,4 +67,3 @@ func UpdateApplication(db *gorm.DB, application *Application) error {
 
 	return nil
 }
-

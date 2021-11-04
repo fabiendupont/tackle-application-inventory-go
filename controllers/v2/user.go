@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
-        "github.com/fabiendupont/tackle-application-inventory-go/database"
-	"github.com/fabiendupont/tackle-application-inventory-go/models"
+        "github.com/fabiendupont/tackle-hub/database"
+	"github.com/fabiendupont/tackle-hub/models"
 	"net/http"
 )
 

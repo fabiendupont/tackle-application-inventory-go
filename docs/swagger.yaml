@@ -1,0 +1,1243 @@
+basePath: /
+definitions:
+  controllers.Stakeholder:
+    properties:
+      display_name:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      job_function_id:
+        type: integer
+    required:
+    - display_name
+    - email
+    - job_function_id
+    type: object
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  models.Application:
+    properties:
+      business_service_id:
+        type: integer
+      businessService:
+        $ref: '#/definitions/models.BusinessService'
+      comments:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      depends_on:
+        items:
+          $ref: '#/definitions/models.Application'
+        type: array
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      tags:
+        items:
+          $ref: '#/definitions/models.Tag'
+        type: array
+      updatedAt:
+        type: string
+    required:
+    - business_service_id
+    - name
+    type: object
+  models.BinaryRepository:
+    properties:
+      application:
+        $ref: '#/definitions/models.Application'
+      application_id:
+        type: integer
+      artifact:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      group:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: string
+      url:
+        type: string
+      version:
+        type: string
+    required:
+    - artifact
+    - group
+    - name
+    - url
+    type: object
+  models.BusinessService:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: string
+      users:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+    required:
+    - name
+    type: object
+  models.Group:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      description:
+        type: string
+      id:
+        type: integer
+      members:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+      name:
+        type: string
+      updatedAt:
+        type: string
+    required:
+    - name
+    type: object
+  models.JobFunction:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  models.Review:
+    properties:
+      application:
+        $ref: '#/definitions/models.Application'
+      application_id:
+        type: integer
+      business_criticality:
+        type: integer
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      effort_estimate:
+        type: string
+      id:
+        type: integer
+      proposed_action:
+        type: string
+      updatedAt:
+        type: string
+      work_priority:
+        type: integer
+    required:
+    - business_criticality
+    - effort_estimate
+    - proposed_action
+    - work_priority
+    type: object
+  models.SourceRepository:
+    properties:
+      application:
+        $ref: '#/definitions/models.Application'
+      application_id:
+        type: integer
+      branch:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: string
+      url:
+        type: string
+    required:
+    - branch
+    - name
+    - url
+    type: object
+  models.Tag:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      name:
+        type: string
+      tag_type_id:
+        type: integer
+      tagType:
+        $ref: '#/definitions/models.TagType'
+      updatedAt:
+        type: string
+    required:
+    - name
+    - tag_type_id
+    type: object
+  models.TagType:
+    properties:
+      colour:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      name:
+        type: string
+      rank:
+        type: integer
+      tags:
+        items:
+          $ref: '#/definitions/models.Tag'
+        type: array
+      updatedAt:
+        type: string
+    required:
+    - name
+    type: object
+  models.User:
+    properties:
+      business_services:
+        items:
+          $ref: '#/definitions/models.BusinessService'
+        type: array
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      display_name:
+        type: string
+      email:
+        type: string
+      groups:
+        items:
+          $ref: '#/definitions/models.Group'
+        type: array
+      id:
+        type: integer
+      job_function_id:
+        type: integer
+      jobFunction:
+        $ref: '#/definitions/models.JobFunction'
+      updatedAt:
+        type: string
+    required:
+    - display_name
+    - email
+    - job_function_id
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: contact@konveyor.io
+    name: Konveyor Tackle
+    url: https://konveyor.io
+  description: Tackle Hub provides an API to manipulate core Tackle objects
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Tackle Hub - OpenAPI
+  version: "3.0"
+paths:
+  /application-inventory/application:
+    get:
+      description: get all the application
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Application'
+            type: array
+      summary: Lists all the applications.
+      tags:
+      - get_applications
+    post:
+      consumes:
+      - application/json
+      description: create an application
+      parameters:
+      - description: Application data
+        in: body
+        name: application
+        required: true
+        schema:
+          $ref: '#/definitions/models.Application'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Application'
+      summary: Create an application
+      tags:
+      - create_application
+  /application-inventory/application/:id:
+    delete:
+      description: delete an application
+      parameters:
+      - description: Application id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Application'
+      summary: Delete an application
+      tags:
+      - delete_application
+    get:
+      description: get a single application by its id.
+      parameters:
+      - description: Application id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Application'
+      summary: Get a single application by its id.
+      tags:
+      - get_application
+    put:
+      consumes:
+      - application/json
+      description: update an application
+      parameters:
+      - description: Application id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Application data
+        in: body
+        name: application
+        required: true
+        schema:
+          $ref: '#/definitions/models.Application'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Application'
+      summary: Update an application
+      tags:
+      - update_application
+  /application-inventory/binary-repository:
+    get:
+      description: get all binary repositories.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BinaryRepository'
+      summary: Get all binary repositories.
+      tags:
+      - get_binary_repositories
+    post:
+      consumes:
+      - application/json
+      description: create a single binary repository.
+      parameters:
+      - description: Binary Repository data
+        in: body
+        name: binary_repository
+        required: true
+        schema:
+          $ref: '#/definitions/models.BinaryRepository'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BinaryRepository'
+      summary: Create a single binary repository.
+      tags:
+      - get_binary_repository
+  /application-inventory/binary-repository/:id:
+    delete:
+      description: delete a single binary repository by its id.
+      parameters:
+      - description: Binary Repository id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BinaryRepository'
+      summary: Delete a single binary repository by its id.
+      tags:
+      - delete_binary_repository
+    get:
+      description: get a single binary repository by its id.
+      parameters:
+      - description: Binary Repsoritory id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BinaryRepository'
+      summary: Get a single binary repository by its id.
+      tags:
+      - get_binary_repository
+  /application-inventory/binary_repository/:id:
+    put:
+      consumes:
+      - application/json
+      description: update a single binary repository by its id.
+      parameters:
+      - description: Binary Repository id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Binary Repository data
+        in: body
+        name: binary_repository
+        required: true
+        schema:
+          $ref: '#/definitions/models.BinaryRepository'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BinaryRepository'
+      summary: Update a single binary repository by its id.
+      tags:
+      - update_binary_repository
+  /application-inventory/review:
+    get:
+      description: get all reviews.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Review'
+      summary: Get all reviews.
+      tags:
+      - get_reviews
+    post:
+      consumes:
+      - application/json
+      description: Create a single review.
+      parameters:
+      - description: Review data
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.Review'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Review'
+      summary: Create a single review.
+      tags:
+      - create_review
+  /application-inventory/review/:id:
+    delete:
+      description: delete a single review by its id.
+      parameters:
+      - description: Review id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Review'
+      summary: Delete a single review by its id.
+      tags:
+      - delete_review
+    get:
+      description: get a single review by its id.
+      parameters:
+      - description: Review id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Review'
+      summary: Get a single review by its id.
+      tags:
+      - get_review
+    put:
+      consumes:
+      - application/json
+      description: update a single review by its id.
+      parameters:
+      - description: Review id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Review data
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.Review'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Review'
+      summary: Update a single review by its id.
+      tags:
+      - update_review
+  /application-inventory/source-repository:
+    get:
+      description: get all source repositories.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceRepository'
+      summary: Get all source repositories.
+      tags:
+      - get_source_repositories
+    post:
+      consumes:
+      - application/json
+      description: create a single source repository.
+      parameters:
+      - description: Source Repository data
+        in: body
+        name: source_repository
+        required: true
+        schema:
+          $ref: '#/definitions/models.SourceRepository'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceRepository'
+      summary: Create a single source repository.
+      tags:
+      - get_source_repository
+  /application-inventory/source-repository/:id:
+    delete:
+      description: delete a single source repository by its id.
+      parameters:
+      - description: Source Repository id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceRepository'
+      summary: Delete a single source repository by its id.
+      tags:
+      - delete_source_repository
+    get:
+      description: get a single source repository by its id.
+      parameters:
+      - description: Source Repsoritory id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceRepository'
+      summary: Get a single source repository by its id.
+      tags:
+      - get_source_repository
+  /application-inventory/source_repository/:id:
+    put:
+      consumes:
+      - application/json
+      description: update a single source repository by its id.
+      parameters:
+      - description: Source Repository id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Source Repository data
+        in: body
+        name: source_repository
+        required: true
+        schema:
+          $ref: '#/definitions/models.SourceRepository'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SourceRepository'
+      summary: Update a single source repository by its id.
+      tags:
+      - update_source_repository
+  /control/stakeholder-group/:id:
+    delete:
+      description: delete a single stakeholder group by its id.
+      parameters:
+      - description: Stakeholder Group id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Group'
+      summary: Delete a single stakeholder group by its id.
+      tags:
+      - delete_stakeholder_group
+  /controls/business-service:
+    get:
+      description: get all business services.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.BusinessService'
+            type: array
+      summary: Get all business services.
+      tags:
+      - get_business_services
+    post:
+      consumes:
+      - application/json
+      description: create a business service.
+      parameters:
+      - description: Business Service data
+        in: body
+        name: business_service
+        required: true
+        schema:
+          $ref: '#/definitions/models.BusinessService'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BusinessService'
+      summary: Create a business service.
+      tags:
+      - create_business_service
+  /controls/business-service/:id:
+    delete:
+      description: delete a single business service by its id.
+      parameters:
+      - description: Business Service id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BusinessService'
+      summary: Delete a single business service by its id.
+      tags:
+      - delete_business_service
+    get:
+      description: get a single business service by its id.
+      parameters:
+      - description: Business Service id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BusinessService'
+      summary: Get a single business service by its id.
+      tags:
+      - get_business_service
+    put:
+      consumes:
+      - application/json
+      description: update a single business_service by its id.
+      parameters:
+      - description: Business Service id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Business Service data
+        in: body
+        name: business_service
+        required: true
+        schema:
+          $ref: '#/definitions/models.BusinessService'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BusinessService'
+      summary: Update a single business service by its id.
+      tags:
+      - update_business_service
+  /controls/job-function:
+    get:
+      description: get all job functions.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JobFunction'
+      summary: Get all job functions.
+      tags:
+      - get_job_functions
+    post:
+      consumes:
+      - application/json
+      description: create a single job function.
+      parameters:
+      - description: Job Function data
+        in: body
+        name: application
+        required: true
+        schema:
+          $ref: '#/definitions/models.JobFunction'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JobFunction'
+      summary: Create a single job function.
+      tags:
+      - create_job_function
+  /controls/job-function/:id:
+    delete:
+      description: delete a single job function by its id.
+      parameters:
+      - description: Job Function id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JobFunction'
+      summary: Delete a single job function by its id.
+      tags:
+      - delete_job_function
+    get:
+      description: get a single job function by its id.
+      parameters:
+      - description: Job Function id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JobFunction'
+      summary: Get a single job function by its id.
+      tags:
+      - get_job_function
+    put:
+      consumes:
+      - application/json
+      description: update a single job function by its id.
+      parameters:
+      - description: Job Function id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Job Function data
+        in: body
+        name: application
+        required: true
+        schema:
+          $ref: '#/definitions/models.JobFunction'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JobFunction'
+      summary: Update a single job function by its id.
+      tags:
+      - update_job_function
+  /controls/stakeholder:
+    get:
+      description: get all stakeholders.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.Stakeholder'
+      summary: Get all stakeholders.
+      tags:
+      - get_stakeholders
+    post:
+      consumes:
+      - application/json
+      description: create a single stakeholder.
+      parameters:
+      - description: Stakeholder data
+        in: body
+        name: stakeholder
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.Stakeholder'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.Stakeholder'
+      summary: Create a single stakeholder.
+      tags:
+      - create stakeholder
+  /controls/stakeholder-group:
+    get:
+      description: get all stakeholder groups.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Group'
+      summary: Get all stakeholder groups.
+      tags:
+      - get_stakeholder_groups
+    post:
+      consumes:
+      - application/json
+      description: create a single stakeholder group.
+      parameters:
+      - description: Stakeholder Group data
+        in: body
+        name: stakeholder_group
+        required: true
+        schema:
+          $ref: '#/definitions/models.Group'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Group'
+      summary: Create a single stakeholder group.
+      tags:
+      - create_stakeholder_group
+  /controls/stakeholder-group/:id:
+    get:
+      description: get a single stakeholder group by its id.
+      parameters:
+      - description: Stakeholder Group id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Group'
+      summary: Get a single stakeholder group by its id.
+      tags:
+      - get_stakeholder_group
+    put:
+      consumes:
+      - application/json
+      description: update a single stakeholder group by its id.
+      parameters:
+      - description: Stakeholder Group id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Stakeholder Group data
+        in: body
+        name: stakeholder_group
+        required: true
+        schema:
+          $ref: '#/definitions/models.Group'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Group'
+      summary: Update a single stakeholder group by its id.
+      tags:
+      - update_stakeholder_group
+  /controls/stakeholder/:id:
+    delete:
+      description: delete a single stakeholder by its id.
+      parameters:
+      - description: Stakeholder id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.Stakeholder'
+      summary: Delete a single stakeholder by its id.
+      tags:
+      - delete_stakeholder
+    get:
+      description: get a single stakeholder by its id.
+      parameters:
+      - description: Stakeholder id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.Stakeholder'
+      summary: Get a single stakeholder by its id.
+      tags:
+      - get_stakeholder
+    put:
+      consumes:
+      - application/json
+      description: update a single stakeholder by its id.
+      parameters:
+      - description: Stakeholder id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Stakeholder data
+        in: body
+        name: stakeholder
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.Stakeholder'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.Stakeholder'
+      summary: Update a single stakeholder by its id.
+      tags:
+      - update_stakeholder
+  /controls/tag:
+    get:
+      description: get all tags.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Get all tags.
+      tags:
+      - get_tags
+    post:
+      consumes:
+      - application/json
+      description: create a single tag.
+      parameters:
+      - description: Tag data
+        in: body
+        name: tag
+        required: true
+        schema:
+          $ref: '#/definitions/models.Tag'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Create a single tag.
+      tags:
+      - create_tag
+  /controls/tag-type:
+    get:
+      description: get all tag types.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TagType'
+      summary: Get all tag types.
+      tags:
+      - get_tag_types
+    post:
+      consumes:
+      - application/json
+      description: create a single tag type.
+      parameters:
+      - description: Tag Type data
+        in: body
+        name: tag_type
+        required: true
+        schema:
+          $ref: '#/definitions/models.TagType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TagType'
+      summary: Create a single tag type.
+      tags:
+      - create_tag_type
+  /controls/tag-type/:id:
+    delete:
+      description: delete a single tag type by its id.
+      parameters:
+      - description: Tag Type id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TagType'
+      summary: Delete a single tag type by its id.
+      tags:
+      - delete_tag_type
+    get:
+      description: get a single tag type by its id.
+      parameters:
+      - description: Tag Type id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TagType'
+      summary: Get a single tag type by its id.
+      tags:
+      - get_tag_type
+    put:
+      consumes:
+      - application/json
+      description: update a single tag type by its id.
+      parameters:
+      - description: Tag Type id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Tag Type data
+        in: body
+        name: tag_type
+        required: true
+        schema:
+          $ref: '#/definitions/models.TagType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TagType'
+      summary: Update a single tag type by its id.
+      tags:
+      - update_tag_type
+  /controls/tag/:id:
+    delete:
+      description: delete a single tag by its id.
+      parameters:
+      - description: Tag id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Delete a single tag by its id.
+      tags:
+      - delete_tag
+    get:
+      description: get a single tag by its id.
+      parameters:
+      - description: Tag id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Get a single tag by its id.
+      tags:
+      - get_tag
+    put:
+      consumes:
+      - application/json
+      description: update a single tag by its id.
+      parameters:
+      - description: Tag id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Tag data
+        in: body
+        name: tag
+        required: true
+        schema:
+          $ref: '#/definitions/models.Tag'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Update a single tag by its id.
+      tags:
+      - update_tag
+schemes:
+- http
+swagger: "2.0"

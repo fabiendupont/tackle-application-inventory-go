@@ -2,12 +2,18 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
-        "github.com/fabiendupont/tackle-application-inventory-go/database"
-	"github.com/fabiendupont/tackle-application-inventory-go/models"
+        "github.com/fabiendupont/tackle-hub/database"
+	"github.com/fabiendupont/tackle-hub/models"
 	"net/http"
 )
 
-// GET /business_services
+// GetBusinessServices godoc
+// @summary Get all business services.
+// @description get all business services.
+// @tags get_business_services
+// @produce json
+// @success 200 {object} []models.BusinessService
+// @router /controls/business-service [get]
 func GetBusinessServices(c *gin.Context) {
 	businessServices, err := models.GetBusinessServices(database.DB)
 	if err != nil {
@@ -18,7 +24,14 @@ func GetBusinessServices(c *gin.Context) {
 	c.JSON(http.StatusOK, businessServices)
 }
 
-// GET /business_services/:id
+// GetBusinessService godoc
+// @summary Get a single business service by its id.
+// @description get a single business service by its id.
+// @tags get_business_service
+// @produce json
+// @success 200 {object} models.BusinessService
+// @router /controls/business-service/:id [get]
+// @param id path integer true "Business Service id"
 func GetBusinessService(c *gin.Context) {
 	id := c.Params.ByName("id")
 	businessService, exists, err := models.GetBusinessServiceByID(database.DB, id)
@@ -35,7 +48,15 @@ func GetBusinessService(c *gin.Context) {
 	c.JSON(http.StatusOK, businessService)
 }
 
-// POST /business_services
+// CreateBusinessService godoc
+// @summary Create a business service.
+// @description create a business service.
+// @tags create_business_service
+// @accept json
+// @produce json
+// @success 200 {object} models.BusinessService
+// @router /controls/business-service [post]
+// @param business_service body models.BusinessService true "Business Service data"
 func CreateBusinessService(c *gin.Context) {
 	businessService := models.BusinessService{}
 	err := c.BindJSON(&businessService)
@@ -52,7 +73,13 @@ func CreateBusinessService(c *gin.Context) {
 	c.JSON(http.StatusOK, businessService)
 }
 
-// DELETE /business_services/:id
+// DeleteBusinessService godoc
+// @summary Delete a single business service by its id.
+// @description delete a single business service by its id.
+// @tags delete_business_service
+// @success 200 {object} models.BusinessService
+// @router /controls/business-service/:id [delete]
+// @param id path integer true "Business Service id"
 func DeleteBusinessService(c *gin.Context) {
 	id := c.Params.ByName("id")
 	_, exists, err := models.GetBusinessServiceByID(database.DB, id)
@@ -74,7 +101,16 @@ func DeleteBusinessService(c *gin.Context) {
 	c.JSON(http.StatusOK, nil)
 }
 
-
+// UpdateBusinessService godoc
+// @summary Update a single business service by its id.
+// @description update a single business_service by its id.
+// @tags update_business_service
+// @accept json
+// @produce json
+// @success 200 {object} models.BusinessService
+// @router /controls/business-service/:id [put]
+// @param id path integer true "Business Service id"
+// @param business_service body models.BusinessService true "Business Service data"
 func UpdateBusinessService(c *gin.Context) {
 	id := c.Params.ByName("id")
 	_, exists, err := models.GetBusinessServiceByID(database.DB, id)

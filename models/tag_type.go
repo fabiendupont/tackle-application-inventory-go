@@ -6,15 +6,15 @@ import (
 
 type TagType struct {
 	gorm.Model
-	Name	string	`json:"name"`
-	Colour	string	`json:"colour"`
+	Name	string	`json:"name" gorm:"notnull" binding:"required"`
 	Rank	uint	`json:"rank"`
+	Colour	string	`json:"colour"`
+	Tags	[]Tag	`json:"tags"`
 }
 
 func GetTagTypes(db *gorm.DB) ([]TagType, error) {
 	tagTypes := []TagType{}
-	query :=  db.Select("tag_types.*").Group("tag_types.id")
-	if err := query.Find(&tagTypes).Error; err != nil {
+	if err := db.Preload("Tags").Find(&tagTypes).Error; err != nil {
 		return tagTypes, err
 	}
 
@@ -23,8 +23,7 @@ func GetTagTypes(db *gorm.DB) ([]TagType, error) {
 
 func GetTagTypeByID(db *gorm.DB, id string) (TagType, bool, error) {
 	tagType := TagType{}
-	query := db.Select("tag_types.*").Group("tag_types.id")
-	err := query.Where("tag_types.id = ?", id).First(&tagType).Error
+	err := db.Preload("Tags").First(&tagType, "tag_types.id = ?", id).Error
 	if err != nil {
 		if err != gorm.ErrRecordNotFound {
 			return tagType, false, err

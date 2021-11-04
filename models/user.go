@@ -6,10 +6,12 @@ import (
 
 type User struct {
 	gorm.Model
-	Username	string	`json:"username" gorm:"notnull,unique,index" binding:"required,alphanum,min=6,max=32"`
-	DisplayName	string	`json:"displayName" gorm:"notnull" binding:"required"`
-	Email		string	`json:"email" gorm:"notnull" binding:"required,email"`
-	Groups		[]Group	`json:"groups" gorm:"many2many:user_groups"`
+	Email			string			`json:"email" gorm:"notnull" binding:"required,email"`
+	DisplayName		string			`json:"display_name" gorm:"notnull" binding:"required"`
+	JobFunctionID		uint			`json:"job_function_id" gorm:"notnull" binding:"required"`
+	JobFunction		JobFunction
+	BusinessServices	[]BusinessService	`json:"business_services" gorm:"many2many:user_business_services"`
+	Groups			[]Group			`json:"groups" gorm:"many2many:user_groups"`
 }
 
 func GetUsers(db *gorm.DB) ([]User, error) {
